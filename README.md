@@ -401,8 +401,38 @@ GET /api/health
 
 ## Deployment
 
+### Vercel
+
+This repository can be imported into Vercel from the repo root. The root
+`vercel.json` builds the Vite app in `AI-Exam`, serves `AI-Exam/dist`, and
+routes `/api/*` to the Express serverless function.
+
+Set these Vercel environment variables before deploying:
+
+```env
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=replace-with-a-long-random-secret
+JWT_EXPIRES_IN=1h
+```
+
+Optional production variables:
+
+```env
+FRONTEND_URL=https://your-vercel-domain.vercel.app
+OPENAI_API_KEY=sk-...
+JSON_BODY_LIMIT=4mb
+```
+
+Leave `VITE_API_URL` unset on Vercel unless you are using a separate backend
+domain. The frontend defaults to same-origin `/api`.
+
+Use MongoDB Atlas or another hosted MongoDB connection string. A local MongoDB
+URI such as `mongodb://localhost:27017/...` will not work from Vercel.
+
+### Other Hosts
+
 1. Build frontend: `cd AI-Exam && npm run build`
-2. Host `dist/` behind **HTTPS** (required for camera/microphone)
+2. Host `AI-Exam/dist/` behind **HTTPS** (required for camera/microphone)
 3. Deploy backend with production `MONGODB_URI`, `JWT_SECRET`, `FRONTEND_URL`
 4. Set `VITE_API_URL` to your public API URL
 5. Rotate default admin password

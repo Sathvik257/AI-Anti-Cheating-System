@@ -1,0 +1,13 @@
+{
+  "name": "ai-anti-cheating-system",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "AI-Exam"
+  ],
+  "scripts": {
+    "build": "npm --workspace AI-Exam run build",
+    "dev": "npm --workspace AI-Exam run dev"
+  }
+}
