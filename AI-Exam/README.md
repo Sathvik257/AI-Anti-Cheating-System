@@ -62,6 +62,36 @@ For production, update this to your backend API URL:
 VITE_API_URL=https://api.yourapp.com/api
 ```
 
+On Vercel, leave `VITE_API_URL` unset unless you are using a separate backend
+domain. The app defaults to the same-origin `/api` serverless function.
+
+### Deploy to Vercel
+
+When importing the project in Vercel, use the `AI-Exam` folder as the project
+root. The included `vercel.json` sets the Vite build command, `dist` output
+directory, SPA fallback routing, and the Express API function under `/api`.
+
+Set these environment variables in Vercel before deploying:
+
+```env
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=replace-with-a-long-random-secret
+JWT_EXPIRES_IN=1h
+```
+
+Optional production variables:
+
+```env
+FRONTEND_URL=https://your-vercel-domain.vercel.app
+OPENAI_API_KEY=sk-...
+JSON_BODY_LIMIT=4mb
+```
+
+Use MongoDB Atlas or another hosted MongoDB connection string. A local MongoDB
+URI such as `mongodb://localhost:27017/...` will not work from Vercel.
+Keep screenshot and recording payloads below Vercel's function payload limits,
+or move large media uploads to dedicated object storage.
+
 ### Build for Production
 
 ```bash

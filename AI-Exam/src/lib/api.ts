@@ -1,12 +1,9 @@
-// API Configuration — in dev, prefer same-origin `/api` (Vite proxy → backend) so fetch never
-// crosses origins (localhost vs 127.0.0.1 vs LAN IP all break absolute http://localhost:3000).
+// API Configuration: default to same-origin `/api` for the Vite dev proxy and Vercel.
 const envApi = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
 const API_BASE_URL =
   envApi && envApi.length > 0
     ? envApi.replace(/\/$/, "")
-    : import.meta.env.DEV
-      ? "/api"
-      : "http://localhost:3000/api";
+    : "/api";
 
 export interface ApiResponse<T> {
   success: boolean;
